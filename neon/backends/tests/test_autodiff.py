@@ -95,6 +95,10 @@ class Funcs():
     def func_scalar_broadcast(be, x0, x1, x2, x3, x4):
         return (0.2 * x0 - x1 * x2 / 3 * 4 * x1 + x0 * x0 / x0 / x3 + x4)
 
+    @staticmethod
+    def func_transpose(be, x0, x1, x2, x3, x4):
+        return (x0 + x0.T - ((x0 + x1).T + (x2 - x3 + x4).T).T - x1.T).T - x4
+
 
 def pytest_generate_tests(metafunc):
     # number of test to repeat
@@ -107,6 +111,7 @@ def pytest_generate_tests(metafunc):
         Funcs.func_dot,
         Funcs.func_dot_reduction_mix,
         Funcs.func_scalar_broadcast,
+        Funcs.func_transpose
     ]
     test_tensor_flags = ['pos_rand', 'neg_rand', 'rand']
     test_tensor_dims = [(2, 2)]

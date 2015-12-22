@@ -78,6 +78,7 @@ class Tensor(object):
         self.name = name
         self.persist_values = persist_values
         self._min_dims = 2
+        self.base = None
 
     def __str__(self):
         """
@@ -325,6 +326,14 @@ class Tensor(object):
             NotImplementedError: Can't be instantiated directly.
         """
         raise NotImplementedError()
+
+    @property
+    def _base_tensor(self):
+        """
+        Returns the base tensor of the tensor. self.base is None if the tensor
+        is its own base, but self._base_tensor always return the base tensor.
+        """
+        return self.base if self.base is not None else self
 
     def __add__(self, other):
         """
