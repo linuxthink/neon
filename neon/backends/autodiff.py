@@ -347,6 +347,9 @@ class Autodiff(object):
         self.dtype = be.default_dtype
         if next_error is not None:
             self.next_error = next_error
+            assert next_error.shape == op_tree.shape, (
+                "next_error.shape %s must be consistant with op_tree.shape %s"
+                % (next_error.shape, op_tree.shape))
         else:
             self.next_error = self.be.ones(op_tree.shape)
 
